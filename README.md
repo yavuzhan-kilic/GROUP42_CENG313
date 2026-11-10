@@ -17,7 +17,8 @@ CENG313 Introduction to Data Science course project, based on the Kaggle competi
 - **Metric:** weighted R² computed over all targets together (weights: total 0.5, GDM 0.2, others 0.1).
 - **Training data:** 357 images. `train.csv` has 1,785 rows, one per image and target pair, with
   metadata for each image (sampling date, state, species, NDVI, average height).
-- **Test data:** images only. TODO: confirm the test columns from section 7 of the notebook.
+- **Test data:** images only. The test table has `sample_id`, `image_path` and `target_name`;
+  the metadata columns are not available at test time.
 
 ## Approach
 
@@ -34,7 +35,13 @@ Notebook: [`assignment1_eda_baseline.ipynb`](assignment1_eda_baseline.ipynb)
 - **Validation:** a random 80/20 split compared with 5-fold cross-validation grouped by sampling date.
 - **Baselines:** (1) training mean, (2) mean RGB values + Ridge regression.
 
-TODO: add the two or three most important findings after running the notebook.
+Main findings:
+
+- The targets are right-skewed and clover is zero in 37.8% of the images.
+- Green, GDM and total biomass are strongly correlated (0.83 to 0.90).
+- Average height is the most informative metadata column, but metadata is not available at test time.
+- Mean colour is a weak predictor: RGB + Ridge is only slightly better than the training mean,
+  and its score varies a lot between folds.
 
 ### Assignment 2 — Proposed solution
 
@@ -44,8 +51,8 @@ TODO
 
 | Model | Random split R² | Grouped CV R² (mean ± std) | Kaggle public | Kaggle private |
 |-------|----------------|----------------------------|---------------|----------------|
-| Training mean | TODO | TODO | – | – |
-| RGB + Ridge | TODO | TODO | TODO | TODO |
+| Training mean | 0.2096 | 0.2283 ± 0.0382 | – | – |
+| RGB + Ridge | 0.2865 | 0.2620 ± 0.1138 | – | – |
 
 ## Repository structure
 
