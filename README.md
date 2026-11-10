@@ -84,6 +84,7 @@ Jupyter with `CSIRO_DATA_DIR=data`.
 | Date | Member | Work |
 |------|--------|------|
 | 2026-11-10 | Yavuzhan Kılıç | Repository structure, data helpers and baselines |
+| 2026-11-11 | Efe Arda Dakes | Ran the notebook and reviewed the EDA findings |
 
 ## Kaggle submission history
 
