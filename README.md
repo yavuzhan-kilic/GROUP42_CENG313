@@ -12,7 +12,7 @@ CENG313 Introduction to Data Science course project, based on the Kaggle competi
 | Name | Student ID | GitHub |
 |------|-----------|--------|
 | Yavuzhan Kılıç | 23118080021 | [@yavuzhan-kilic](https://github.com/yavuzhan-kilic) |
-| Efe Arda Dakes | 23118080071 | [@efe-arda-dakes](https://github.com/efe-arda-dakes) |
+| Efe Arda Dakes | 23118080071 | [@Efe-Arda-Dakes](https://github.com/Efe-Arda-Dakes) |
 
 ## Competition and dataset
 
@@ -54,7 +54,6 @@ Main findings:
 - Average height is the most informative metadata column, but metadata is not available at test time.
 - Mean colour is a weak predictor: RGB + Ridge is only slightly better than the training mean,
   and its score varies a lot between folds.
-
 - The Kaggle private score (0.2583) is close to the grouped cross-validation score (0.2620), while the
   random split over-estimated it (0.2865), so grouped cross-validation is a reliable estimate.
 
