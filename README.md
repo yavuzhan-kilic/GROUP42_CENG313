@@ -75,17 +75,17 @@ over-estimated it (0.2865). The best private score on the final leaderboard is 0
 
 ```
 GROUP42_CENG313/
-├── README.md
-├── requirements.txt
-├── .gitignore                       # keeps data/ and submission files out of the repository
+├── README.md                        # group, members, competition, how to run, scores
+├── requirements.txt                 # Python packages used
+├── .gitignore                       # excludes data/, zip files and submission.csv
 ├── assignment1_eda_baseline.ipynb   # Assignment 1: EDA and baselines
+├── src/
+│   ├── __init__.py                  # empty file, makes src importable
+│   ├── data.py                      # loading, reshaping, label checks, image features
+│   ├── models.py                    # validation splits, baselines, cross-validation
+│   └── utils.py                     # Kaggle weighted R², submission format and saving
 ├── data/                            # local copy of the Kaggle data (not committed)
-├── submissions/                     # Kaggle score screenshots
-└── src/
-    ├── data.py      # reshaping, label consistency checks, image features
-    ├── models.py    # validation splits, baselines, cross-validation
-    └── utils.py     # Kaggle weighted R², submission format and saving
-```
+└── submissions/                     # Kaggle score screenshots```
 
 ## Getting the data
 
