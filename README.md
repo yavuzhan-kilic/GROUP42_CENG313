@@ -85,7 +85,8 @@ GROUP42_CENG313/
 │   ├── models.py                    # validation splits, baselines, cross-validation
 │   └── utils.py                     # Kaggle weighted R², submission format and saving
 ├── data/                            # local copy of the Kaggle data (not committed)
-└── submissions/                     # Kaggle score screenshots```
+└── submissions/                     # Kaggle score screenshots
+```
 
 ## Getting the data
 
