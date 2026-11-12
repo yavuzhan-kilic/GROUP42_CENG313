@@ -3,6 +3,10 @@
 CENG313 Introduction to Data Science course project, based on the Kaggle competition
 [CSIRO - Image2Biomass Prediction](https://www.kaggle.com/competitions/csiro-biomass).
 
+**Group ID:** 42
+
+**Current Kaggle score (late submission, RGB + Ridge baseline):** public 0.31822 · private 0.25833
+
 ## Team
 
 | Name | Student ID | GitHub |
@@ -14,7 +18,8 @@ CENG313 Introduction to Data Science course project, based on the Kaggle competi
 
 - **Task:** predict five dry biomass weights (grams) from a top-view pasture image:
   `Dry_Green_g`, `Dry_Dead_g`, `Dry_Clover_g`, `GDM_g` (green + clover) and `Dry_Total_g` (GDM + dead).
-- **Metric:** weighted R² computed over all targets together (weights: total 0.5, GDM 0.2, others 0.1).
+- **Metric:** globally weighted R² computed over all (image, target) pairs together, in grams with no log
+  transform (weights: total 0.5, GDM 0.2, others 0.1).
 - **Training data:** 357 images. `train.csv` has 1,785 rows, one per image and target pair, with
   metadata for each image (sampling date, state, species, NDVI, average height).
 - **Test data:** images only. The test table has `sample_id`, `image_path` and `target_name`;
@@ -34,6 +39,7 @@ Notebook: [`assignment1_eda_baseline.ipynb`](assignment1_eda_baseline.ipynb)
   correlations between targets and with metadata, representation over states, species and dates.
 - **Validation:** a random 80/20 split compared with 5-fold cross-validation grouped by sampling date.
 - **Baselines:** (1) training mean, (2) mean RGB values + Ridge regression.
+- **Kaggle:** late submission of RGB + Ridge, public 0.31822 and private 0.25833 (see the submission history).
 
 Main findings:
 
@@ -52,7 +58,10 @@ TODO
 | Model | Random split R² | Grouped CV R² (mean ± std) | Kaggle public | Kaggle private |
 |-------|----------------|----------------------------|---------------|----------------|
 | Training mean | 0.2096 | 0.2283 ± 0.0382 | – | – |
-| RGB + Ridge | 0.2865 | 0.2620 ± 0.1138 | – | – |
+| RGB + Ridge | 0.2865 | 0.2620 ± 0.1138 | 0.31822 | 0.25833 |
+
+The private score (0.2583) is close to the grouped cross-validation score (0.2620), while the random split
+over-estimated it (0.2865). The best private score on the final leaderboard is 0.67899.
 
 ## Repository structure
 
@@ -60,12 +69,26 @@ TODO
 GROUP42_CENG313/
 ├── README.md
 ├── requirements.txt
+├── .gitignore                       # keeps data/ and submission files out of the repository
 ├── assignment1_eda_baseline.ipynb   # Assignment 1: EDA and baselines
 ├── data/                            # local copy of the Kaggle data (not committed)
+├── submissions/                     # Kaggle score screenshots
 └── src/
     ├── data.py      # reshaping, label consistency checks, image features
-    └── models.py    # validation splits, Kaggle weighted R², baselines, cross-validation
+    ├── models.py    # validation splits, Kaggle weighted R², baselines, cross-validation
+    └── utils.py     # converting predictions to the submission format and saving it
 ```
+
+## Getting the data
+
+1. Join the competition on Kaggle and accept its rules:
+   <https://www.kaggle.com/competitions/csiro-biomass/rules>
+2. The Colab notebook downloads the data itself with the Kaggle API (see "How to run").
+   To download it manually instead, install the Kaggle CLI, add your API token and run:
+   ```
+   kaggle competitions download -c csiro-biomass
+   ```
+   Then extract `csiro-biomass.zip` into the `data/` folder. The data is not committed to this repository.
 
 ## How to run
 
@@ -85,7 +108,13 @@ Jupyter with `CSIRO_DATA_DIR=data`.
 |------|--------|------|
 | 2026-11-10 | Yavuzhan Kılıç | Repository structure, data helpers and baselines |
 | 2026-11-11 | Efe Arda Dakes | Ran the notebook and reviewed the EDA findings |
+| 2026-11-12 | Efe Arda Dakes | Added submission helpers (src/utils.py) and made the first Kaggle late submission (RGB + Ridge) |
 
 ## Kaggle submission history
 
-No submissions yet.
+The competition closed on 28 January 2026, so we use late submissions. They receive public and private
+scores but do not appear on the leaderboard.
+
+| Date | Kaggle notebook | Model | Public | Private | Screenshot |
+|------|-----------------|-------|--------|---------|------------|
+| 2026-11-12 | group42-assignment1-baseline (version 2) | RGB + Ridge | 0.31822 | 0.25833 | [link](submissions/assignment1_late_submission.png) |
