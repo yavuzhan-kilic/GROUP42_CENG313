@@ -1,6 +1,5 @@
 # Data (download from Kaggle, don't commit)
-data/*
-!data/.gitkeep
+data/
 *.zip
 
 # Python
