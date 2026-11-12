@@ -83,8 +83,8 @@ GROUP42_CENG313/
 ├── submissions/                     # Kaggle score screenshots
 └── src/
     ├── data.py      # reshaping, label consistency checks, image features
-    ├── models.py    # validation splits, Kaggle weighted R², baselines, cross-validation
-    └── utils.py     # converting predictions to the submission format and saving it
+    ├── models.py    # validation splits, baselines, cross-validation
+    └── utils.py     # Kaggle weighted R², submission format and saving
 ```
 
 ## Getting the data

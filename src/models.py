@@ -1,4 +1,4 @@
-"""Validation splits, the competition metric and the baseline models."""
+"""Validation splits, baseline models and cross-validation."""
 import numpy as np
 import pandas as pd
 from sklearn.linear_model import Ridge
@@ -6,29 +6,7 @@ from sklearn.model_selection import GroupKFold
 from sklearn.pipeline import make_pipeline
 from sklearn.preprocessing import StandardScaler
 
-# Target weights of the competition metric (see the Kaggle Evaluation page).
-TARGET_WEIGHTS = pd.Series({
-    "Dry_Green_g": 0.1,
-    "Dry_Dead_g": 0.1,
-    "Dry_Clover_g": 0.1,
-    "GDM_g": 0.2,
-    "Dry_Total_g": 0.5,
-})
-
-
-def kaggle_r2(actual: pd.DataFrame, predicted: pd.DataFrame) -> float:
-    """Weighted R² computed over all (image, target) values together.
-
-    Every value is weighted by its target's weight. The baseline in the
-    denominator is the single weighted mean of all values, not a per-target mean.
-    """
-    predicted = predicted.loc[actual.index, actual.columns]
-    weights = TARGET_WEIGHTS[actual.columns]
-
-    weighted_mean = (actual * weights).sum().sum() / (weights.sum() * len(actual))
-    residual = ((actual - predicted) ** 2 * weights).sum().sum()
-    total = ((actual - weighted_mean) ** 2 * weights).sum().sum()
-    return float(1 - residual / total)
+from .utils import kaggle_r2
 
 
 def split_images(images: pd.DataFrame, validation_ratio: float = 0.2, seed: int = 42):

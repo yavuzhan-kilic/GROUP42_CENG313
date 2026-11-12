@@ -1,7 +1,31 @@
-"""Helpers for writing Kaggle submission files."""
+"""Shared helpers: the competition metric and Kaggle submission files."""
 from pathlib import Path
 
 import pandas as pd
+
+# Target weights of the competition metric (see the Kaggle Evaluation page).
+TARGET_WEIGHTS = pd.Series({
+    "Dry_Green_g": 0.1,
+    "Dry_Dead_g": 0.1,
+    "Dry_Clover_g": 0.1,
+    "GDM_g": 0.2,
+    "Dry_Total_g": 0.5,
+})
+
+
+def kaggle_r2(actual: pd.DataFrame, predicted: pd.DataFrame) -> float:
+    """Weighted R² computed over all (image, target) values together.
+
+    Every value is weighted by its target's weight. The baseline in the
+    denominator is the single weighted mean of all values, not a per-target mean.
+    """
+    predicted = predicted.loc[actual.index, actual.columns]
+    weights = TARGET_WEIGHTS[actual.columns]
+
+    weighted_mean = (actual * weights).sum().sum() / (weights.sum() * len(actual))
+    residual = ((actual - predicted) ** 2 * weights).sum().sum()
+    total = ((actual - weighted_mean) ** 2 * weights).sum().sum()
+    return float(1 - residual / total)
 
 
 def make_submission(test: pd.DataFrame, predictions: pd.DataFrame) -> pd.DataFrame:
