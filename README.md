@@ -102,7 +102,7 @@ GROUP42_CENG313/
 ## How to run
 
 1. Open the notebook in Colab:
-   <https://colab.research.google.com/github/yavuzhan-kilic/GROUP42_CENG313/blob/main/assignment1_eda_baseline.ipynb>
+   <https://colab.research.google.com/github/ceng313-2026/GROUP42_CENG313/blob/main/assignment1_eda_baseline.ipynb>
 2. Accept the competition rules on Kaggle. Add your Kaggle API token to Colab's **Secrets** panel
    as `KAGGLE_API_TOKEN` and enable notebook access.
 3. Run all cells. The notebook clones this repository, downloads the data and imports the code
